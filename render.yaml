@@ -1,11 +1,11 @@
 services:
   - type: web
-    name: ai-telegram-bot
+    name: ai-telegram-bot-google
     env: python
     buildCommand: "pip install -r requirements.txt"
     startCommand: "gunicorn dummy:app & python bot.py"
     envVars:
       - key: TELEGRAM_TOKEN
         value: YOUR_TELEGRAM_TOKEN
-      - key: OPENROUTER_API_KEY
-        value: YOUR_OPENROUTER_API_KEY
+      - key: GOOGLE_API_KEY
+        value: YOUR_GOOGLE_API_KEY
