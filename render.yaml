@@ -3,7 +3,7 @@ services:
     name: ai-telegram-bot
     env: python
     buildCommand: "pip install -r requirements.txt"
-    startCommand: "python bot.py"
+    startCommand: "gunicorn dummy:app & python bot.py"
     envVars:
       - key: TELEGRAM_TOKEN
         value: YOUR_TELEGRAM_TOKEN
