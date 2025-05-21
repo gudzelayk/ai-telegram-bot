@@ -4,7 +4,7 @@ from agent import ask_gpt
 from config import TELEGRAM_TOKEN
 
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    await update.message.reply_text("Привіт! Я Google Gemini AI-бот. Напиши запит.")
+    await update.message.reply_text("Привіт! Я AI-бот на Google Gemini API. Напиши запит.")
 
 async def handle(update: Update, context: ContextTypes.DEFAULT_TYPE):
     text = update.message.text
