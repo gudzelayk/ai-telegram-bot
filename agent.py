@@ -1,18 +1,26 @@
-from openai import OpenAI
-from config import OPENAI_API_KEY
+import requests
+import os
 
-client = OpenAI(api_key=OPENAI_API_KEY)
+API_KEY = os.getenv("OPENROUTER_API_KEY")
+MODEL = "mistralai/mistral-7b-instruct"
 
 def ask_gpt(prompt):
     try:
-        response = client.chat.completions.create(
-            model="gpt-3.5-turbo",
-            messages=[
-                {"role": "system", "content": "Ти AI-помічник."},
-                {"role": "user", "content": prompt}
-            ],
-            temperature=0.7
+        response = requests.post(
+            "https://openrouter.ai/api/v1/chat/completions",
+            headers={
+                "Authorization": f"Bearer {API_KEY}",
+                "Content-Type": "application/json"
+            },
+            json={
+                "model": MODEL,
+                "messages": [
+                    {"role": "system", "content": "Ти AI-помічник."},
+                    {"role": "user", "content": prompt}
+                ]
+            }
         )
-        return response.choices[0].message.content.strip()
+        data = response.json()
+        return data["choices"][0]["message"]["content"]
     except Exception as e:
         return f"Помилка: {e}"
