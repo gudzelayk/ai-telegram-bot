@@ -20,7 +20,17 @@ def ask_gpt(prompt):
                 ]
             }
         )
+
         data = response.json()
-        return data["choices"][0]["message"]["content"]
+
+        # Якщо є choices — повертаємо відповідь
+        if "choices" in data:
+            return data["choices"][0]["message"]["content"]
+        # Якщо є помилка — показуємо
+        elif "error" in data:
+            return f"API Помилка: {data['error']}"
+        else:
+            return f"Невідома відповідь: {data}"
+
     except Exception as e:
         return f"Помилка: {e}"
