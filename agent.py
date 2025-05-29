@@ -1,7 +1,6 @@
+from config import GOOGLE_API_KEY
 import google.generativeai as genai
-import os
 
-# Немає dotenv — ключ має бути заданий безпосередньо в середовищі або коді
 genai.configure(api_key=GOOGLE_API_KEY)
 
 model = genai.GenerativeModel("gemini-2.0-flash")
